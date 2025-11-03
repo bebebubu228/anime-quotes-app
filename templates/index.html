@@ -3,9 +3,95 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Main page</title>
+    <title>Аниме Цитаты - Главная</title>
+    <link rel="stylesheet" href="../static/style.css">
 </head>
 <body>
-    <h1>Главная страница</h1>
+    <header class="main-header">
+    <div class="header-top">
+        <div class="logo-section">
+            <img src="../images/logo1.2.png" alt="Лого" width="230" height="100">
+            <img src="../images/chibi1.2.png" alt="Лого" width="100" height="150">
+        </div> 
+        <div class="slogan-container">
+            <div class="slogan">
+                <h1>Аниме Цитаты</h1>
+                <p>Мудрость японской анимации</p>
+            </div>
+        </div>       
+        <div class="auth-buttons">
+            <button class="auth-btn register-btn" id="registerBtn">Зарегистрироваться</button>
+            <button class="auth-btn login-btn" id="loginBtn">Войти</button>
+        </div>
+    </div>
+        <nav class="main-nav">
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="index.html" class="nav-link active">Главная</a></li>
+                <li class="nav-item"><a href="#" class="nav-link" id="quoteOfDayLink">Цитата дня</a></li>
+                <li class="nav-item"><a href="#" class="nav-link" id="favoritesLink">Избранные цитаты</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main class="main-content">
+        <div class="content-wrapper">
+            <section class="quotes-section">
+                <h2 id="pageTitle">Случайные цитаты</h2>
+                <div class="quotes-list" id="quotesList">
+                    <!-- Цитаты будут загружаться здесь -->
+                </div>
+            </section>
+
+            <aside class="sidebar" id="sidebar">
+                <div class="sidebar-section">
+                    <h3>Случайная цитата персонажа</h3>
+                    <div class="search-box">
+                        <input type="text" id="characterSearch" placeholder="Введите имя персонажа">
+                        <button id="getCharacterQuote">Найти</button>
+                    </div>
+                    <div class="random-quote" id="characterQuoteResult">
+                        <p>Выберите персонажа</p>
+                    </div>
+                </div>
+
+                <div class="sidebar-section">
+                    <h3>Случайная цитата из аниме</h3>
+                    <div class="search-box">
+                        <input type="text" id="animeSearch" placeholder="Введите название аниме">
+                        <button id="getAnimeQuote">Найти</button>
+                    </div>
+                    <div class="random-quote" id="animeQuoteResult">
+                        <p>Выберите аниме</p>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <!-- Модальное окно регистрации -->
+    <div class="modal" id="authModal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h3 id="modalTitle">Зарегистрироваться</h3>
+            <form class="auth-form">
+                <input type="text" placeholder="Имя пользователя" required>
+                <input type="email" placeholder="Email" required>
+                <input type="password" placeholder="Пароль" required>
+                <input type="password" placeholder="Повторите пароль" required>
+                <button type="submit" class="submit-btn">Зарегистрироваться</button>
+            </form>
+            <div class="auth-switch">
+                <p>Уже есть аккаунт? <a href="#" id="switchToLogin">Войти</a></p>
+            </div>
+        </div>
+    </div>
+
+    <footer class="main-footer">
+        <div class="footer-content">
+            <p>&copy; <span id="currentYear">2025</span> Аниме Цитаты</p>
+            <a href="https://github.com/yourusername" target="_blank" class="github-link">GitHub</a>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
