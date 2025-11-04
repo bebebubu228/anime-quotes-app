@@ -69,13 +69,32 @@ def load_quotes():
         if cnx and cnx.is_connected():
             cnx.close()
 
-
-
+def get_quotes():
+    quotes = []
+    cnx = None
+    cursor = None
+    try:
+        cnx = mysql.connector.connect(
+            host = DB_HOST, user = DB_USER, password = DB_PASSWORD, database = DATABASE, port = DB_PORT
+    )
+        cursor = cnx.cursor(dictionary=True)
+        rqst = "SELECT quote, anime_title, name_character FROM quotes ORDER BY RAND() LIMIT 1"
+        cursor.execute(rqst)
+        quotes = cursor.fetchall()
+    except mysql.connector.Error as e:
+        print(f"ошибка:{e}")
+    finally:
+        if cursor:
+            cursor.close()
+        if cnx and cnx.is_connected():
+            cnx.close()
+    return quotes
 app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return render_template("index.html")
+    quotes_list = get_quotes()
+    return render_template("index.html", quotes=quotes_list)
 
 if __name__ == "__main__":
     # load_quotes()
