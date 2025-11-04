@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
@@ -36,9 +36,9 @@
         <div class="content-wrapper">
             <section class="quotes-section">
                 <h2 id="pageTitle">Случайные цитаты</h2>
-                <div class="quotes-list" id="quotesList">
+                <div class="quotes-list" id="quotesList"> -->
                     <!-- Цитаты будут загружаться здесь -->
-                </div>
+                <!-- </div>
             </section>
 
             <aside class="sidebar" id="sidebar">
@@ -65,10 +65,10 @@
                 </div>
             </aside>
         </div>
-    </main>
+    </main> -->
 
     <!-- Модальное окно регистрации -->
-    <div class="modal" id="authModal">
+    <!-- <div class="modal" id="authModal">
         <div class="modal-content">
             <span class="close-btn">&times;</span>
             <h3 id="modalTitle">Зарегистрироваться</h3>
@@ -93,5 +93,285 @@
     </footer>
 
     <script src="script.js"></script>
+</body>
+</html> -->
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Аниме Цитаты - Главная</title>
+    <link rel="stylesheet" href="../static/style.css">
+</head>
+<body>
+    <header class="main-header">
+    <div class="header-top">
+        <div class="logo-section">
+            <img src="../images/logo1.2.png" alt="Лого" width="230" height="100">
+            <img src="../images/chibi1.2.png" alt="Лого" width="100" height="150">
+        </div> 
+        <div class="slogan-container">
+            <div class="slogan">
+                <h1>Аниме Цитаты</h1>
+                <p>Мудрость японской анимации</p>
+            </div>
+        </div>       
+        <div class="auth-buttons">
+            <button class="auth-btn register-btn" id="registerBtn">Зарегистрироваться</button>
+            <button class="auth-btn login-btn" id="loginBtn">Войти</button>
+        </div>
+    </div>
+        <nav class="main-nav">
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="#random" class="nav-link active">Главная</a></li>
+                <li class="nav-item"><a href="#daily" class="nav-link">Цитата дня</a></li>
+                <li class="nav-item"><a href="#favorites" class="nav-link">Избранные цитаты</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main class="main-content">
+        <div class="content-wrapper">
+            <section class="quotes-section">
+                <!-- ВРЕМЕННЫЕ ДАННЫЕ: Случайные цитаты -->
+                <h2>Случайные цитаты</h2>
+                <div class="quotes-list">
+                    <div class="quote-card">
+                        <div class="quote-text">
+                            "Человек не может стать сильным, если не верит в себя. Но вера в себя рождается только тогда, когда в тебя верят другие."
+                        </div>
+                        <div class="quote-meta">
+                            <div class="quote-source">
+                                <span class="quote-character">Наруто Узумаки</span> из 
+                                <span class="quote-anime">"Наруто"</span>
+                            </div>
+                            <button class="favorite-btn">В избранное</button>
+                        </div>
+                    </div>
+                    
+                    <div class="quote-card">
+                        <div class="quote-text">
+                            "Иногда нужно сражаться не ради победы, а ради того, во что ты веришь. Даже если знаешь, что проиграешь."
+                        </div>
+                        <div class="quote-meta">
+                            <div class="quote-source">
+                                <span class="quote-character">Эрен Йегер</span> из 
+                                <span class="quote-anime">"Атака Титанов"</span>
+                            </div>
+                            <button class="favorite-btn">В избранное</button>
+                        </div>
+                    </div>
+                    
+                    <div class="quote-card">
+                        <div class="quote-text">
+                            "Мир жесток, но он также и прекрасен. Эта простая истина делает его таким удивительным."
+                        </div>
+                        <div class="quote-meta">
+                            <div class="quote-source">
+                                <span class="quote-character">Лиора Абиссей</span> из 
+                                <span class="quote-anime">"86"</span>
+                            </div>
+                            <button class="favorite-btn">В избранное</button>
+                        </div>
+                    </div>
+                    
+                    <div class="quote-card">
+                        <div class="quote-text">
+                            "Если ты не готов рискнуть своим обычным, ты никогда не станешь особенным."
+                        </div>
+                        <div class="quote-meta"><div class="quote-source">
+                                <span class="quote-character">Арима Коусей</span> из 
+                                <span class="quote-anime">"Твоя апрельская ложь"</span>
+                            </div>
+                            <button class="favorite-btn">В избранное</button>
+                        </div>
+                    </div>
+                    
+                    <div class="quote-card">
+                        <div class="quote-text">
+                            "Настоящая сила — это не побеждать других. Настоящая сила — это защищать то, что для тебя важно."
+                        </div>
+                        <div class="quote-meta">
+                            <div class="quote-source">
+                                <span class="quote-character">Кеншин Химура</span> из 
+                                <span class="quote-anime">"Rurouni Kenshin"</span>
+                            </div>
+                            <button class="favorite-btn">В избранное</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ВРЕМЕННЫЕ ДАННЫЕ: Цитата дня (скрыта по умолчанию) -->
+                <div id="daily" style="display: none;">
+                    <h2>Цитата дня</h2>
+                    <div class="quotes-list">
+                        <div class="quote-card quote-of-day">
+                            <div class="quote-text">
+                                "Сегодняшний день - это завтрашнее воспоминание. Проживи его так, чтобы было что вспомнить."
+                            </div>
+                            <div class="quote-meta">
+                                <div class="quote-source">
+                                    <span class="quote-character">Койоми Арараги</span> из 
+                                    <span class="quote-anime">"Моногатари"</span>
+                                </div>
+                                <button class="favorite-btn">В избранное</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ВРЕМЕННЫЕ ДАННЫЕ: Избранные цитаты (скрыта по умолчанию) -->
+                <div id="favorites" style="display: none;">
+                    <h2>Избранные цитаты</h2>
+                    <div class="quotes-list">
+                        <div class="quote-card">
+                            <div class="quote-text">
+                                "Настоящий герой не тот, кто никогда не боится, а тот, кто преодолевает свой страх."
+                            </div>
+                            <div class="quote-meta">
+                                <div class="quote-source">
+                                    <span class="quote-character">Итачи Учиха</span> из 
+                                    <span class="quote-anime">"Наруто"</span>
+                                </div>
+                                <button class="favorite-btn added">В избранном</button>
+                            </div>
+                        </div>
+                        
+                        <div class="quote-card">
+                            <div class="quote-text">
+                                "Слезы - это не признак слабости. Это доказательство того, что у тебя было что-то, ради чего стоило бороться."
+                            </div>
+                            <div class="quote-meta">
+                                <div class="quote-source">
+                                    <span class="quote-character">Аска Лэнгли</span> из 
+                                    <span class="quote-anime">"Евангелион"</span>
+                                </div>
+                                <button class="favorite-btn added">В избранном</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <aside class="sidebar">
+                <div class="sidebar-section"><h3>Случайная цитата персонажа</h3>
+                    <div class="search-box">
+                        <!-- ВРЕМЕННЫЕ ДАННЫЕ: Поле поиска -->
+                        <input type="text" placeholder="Введите имя персонажа">
+                        <button>Найти</button>
+                    </div>
+                    <div class="random-quote">
+                        <!-- ВРЕМЕННЫЕ ДАННЫЕ: Пример цитаты персонажа -->
+                        <div class="quote-card">
+                            <div class="quote-text">
+                                "Я не верю в судьбу. Люди сами должны творить свою судьбу."
+                            </div>
+                            <div class="quote-meta">
+                                <div class="quote-source">
+                                    <span class="quote-character">Луффи</span> из 
+                                    <span class="quote-anime">"Ван Пис"</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sidebar-section">
+                    <h3>Случайная цитата из аниме</h3>
+                    <div class="search-box">
+                        <!-- ВРЕМЕННЫЕ ДАННЫЕ: Поле поиска -->
+                        <input type="text" placeholder="Введите название аниме">
+                        <button>Найти</button>
+                    </div>
+                    <div class="random-quote">
+                        <!-- ВРЕМЕННЫЕ ДАННЫЕ: Пример цитаты из аниме -->
+                        <div class="quote-card">
+                            <div class="quote-text">
+                                "Жизнь подобна свече на ветру, готовой угаснуть с следующим порывом, но пока она горит, она сияет ярче всего."
+                            </div>
+                            <div class="quote-meta">
+                                <div class="quote-source">
+                                    <span class="quote-character">Мушико</span> из 
+                                    <span class="quote-anime">"Моя геройская академия"</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <!-- ВРЕМЕННЫЕ ДАННЫЕ: Модальное окно регистрации -->
+    <div class="modal" id="authModal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h3>Зарегистрироваться</h3>
+            <form class="auth-form">
+                <input type="text" placeholder="Имя пользователя" required>
+                <input type="email" placeholder="Email" required>
+                <input type="password" placeholder="Пароль" required>
+                <input type="password" placeholder="Повторите пароль" required>
+                <button type="submit" class="submit-btn">Зарегистрироваться</button>
+            </form>
+            <div class="auth-switch">
+                <p>Уже есть аккаунт? <a href="#">Войти</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ВРЕМЕННЫЕ ДАННЫЕ: Модальное окно входа -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h3>Войти</h3>
+            <form class="auth-form">
+                <input type="text" placeholder="Имя пользователя" required>
+                <input type="password" placeholder="Пароль" required>
+                <button type="submit" class="submit-btn">Войти</button>
+            </form>
+            <div class="auth-switch">
+                <p>Нет аккаунта? <a href="#">Зарегистрироваться</a></p>
+            </div>
+        </div>
+    </div>
+
+    <footer class="main-footer">
+        <div class="footer-content">
+            <p>&copy; 2025 Аниме Цитаты</p>
+            <a href="https://github.com/yourusername" target="_blank" class="github-link">GitHub</a>
+        </div>
+    </footer><!-- ВРЕМЕННЫЕ ДАННЫЕ: Минимальный JS только для переключения вкладок -->
+    <script>
+        // Простой скрипт для переключения вкладок
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('.nav-link');
+            const sections = document.querySelectorAll('.quotes-section > div');
+            
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Убираем активный класс у всех ссылок
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    // Добавляем активный класс текущей ссылке
+                    this.classList.add('active');
+                    
+                    // Скрываем все секции
+                    sections.forEach(section => {
+                        section.style.display = 'none';
+                    });
+
+                    // Показываем нужную секцию
+                    const targetId = this.getAttribute('href').substring(1);
+                    if (targetId === 'random') {
+                        // Показываем основную секцию (первый div в quotes-section)
+                        document.querySelector('.quotes-section > .quotes-list').parentElement.style.display = 'block';
+                    } else {
+                        document.getElementById(targetId).style.display = 'block';
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
