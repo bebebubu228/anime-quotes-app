@@ -42,6 +42,8 @@ body {
 }
 .slogan{
     text-align: center;
+    /* font-style: italic; */
+    font-family: 'Merriweather', serif;
 }
 .slogan h1 {
     color: #2e7d32;
@@ -64,6 +66,7 @@ body {
     flex: 1;
     justify-content: flex-end;
     margin-left: 45px;
+    font-family: 'Source Sans Pro','Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .auth-btn {
@@ -108,6 +111,7 @@ body {
 .main-nav {
     background-color: #c8e6c9;
     padding: 0 5%;
+    
 }
 
 .nav-menu {
