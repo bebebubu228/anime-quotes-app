@@ -1,8 +1,9 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 import requests
 import mysql.connector
 import os
 from dotenv import load_dotenv
+from datetime import datetime, date
 
 load_dotenv()
 
@@ -17,7 +18,7 @@ URL = 'https://api.animechan.io/v1'
 def load_quotes():
 
     params = {
-        "anime" : "Naruto",
+        "anime" : "Cowboy Bebop",
         "page" : 1
     }
     cnx = None
@@ -89,12 +90,88 @@ def get_quotes():
         if cnx and cnx.is_connected():
             cnx.close()
     return quotes
+
+daily_cash = None
+last_cash = None
+
+def get_quotes_of_day():
+    global daily_cash
+    global last_cash
+    today = date.today()
+
+    if daily_cash is not None and last_cash==today:
+        return daily_cash
+    new_quotes = get_quotes()
+
+    if new_quotes:
+        daily_cash = new_quotes
+        last_cash = today
+        return daily_cash
+    else:
+        return[]
+    
+# def search_by_character():
+#     quotes  = None
+#     cnx = None
+#     cursor = None
+#     try:
+#         cnx = mysql.connector.connect(
+#             host = DB_HOST, user = DB_USER, password = DB_PASSWORD, database = DATABASE, port = DB_PORT
+#     )
+#         cursor = cnx.cursor(dictionary=True)
+#         rqst = "SELECT quote, anime_title, name_character FROM quotes WHERE name_character = %s ORDER BY RAND() LIMIT 1"
+#         cursor.execute(rqst)
+#         quotes = cursor.fetchall()
+#     except mysql.connector.Error as e:
+#         print(f"ошибка:{e}")
+#     finally:
+#         if cursor:
+#             cursor.close()
+#         if cnx and cnx.is_connected():
+#             cnx.close()
+#     return quotes
+
+# def search_by_title():
+#     quotes  = None
+#     cnx = None
+#     cursor = None
+#     try:
+#         cnx = mysql.connector.connect(
+#             host = DB_HOST, user = DB_USER, password = DB_PASSWORD, database = DATABASE, port = DB_PORT
+#     )
+#         cursor = cnx.cursor(dictionary=True)
+#         rqst = "SELECT quote, anime_title, name_character FROM quotes WHERE anime_title = %s ORDER BY RAND() LIMIT 1"
+#         cursor.execute(rqst)
+#         quotes = cursor.fetchall()
+#     except mysql.connector.Error as e:
+#         print(f"ошибка:{e}")
+#     finally:
+#         if cursor:
+#             cursor.close()
+#         if cnx and cnx.is_connected():
+#             cnx.close()
+#     return quotes
+
 app = Flask(__name__)
+
+
 
 @app.route('/')
 def index():
-    quotes_list = get_quotes()
-    return render_template("index.html", quotes=quotes_list)
+    random_quotes_list = get_quotes() 
+    return render_template("index.html", random_quotes=random_quotes_list)
+
+@app.route('/daily')
+def daily():
+    daily_quote_list = get_quotes_of_day() 
+    daily_quote_data = daily_quote_list[0] if daily_quote_list else None
+    
+    return render_template("daily_quote.html", daily_quote=daily_quote_data) 
+
+@app.route('/favorites')
+def favorites():
+    favorites_quotes_list = [] 
+    return render_template("favorites.html", favorites_quotes=favorites_quotes_list)
 
 if __name__ == "__main__":
     # load_quotes()
