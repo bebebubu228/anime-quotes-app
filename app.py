@@ -142,71 +142,99 @@ def get_quotes_of_day():
     
     # return data
     
-# def search_by_character():
-#     quotes  = None
-#     cnx = None
-#     cursor = None
-#     try:
-#         cnx = mysql.connector.connect(
-#             host = DB_HOST, user = DB_USER, password = DB_PASSWORD, database = DATABASE, port = DB_PORT
-#     )
-#         cursor = cnx.cursor(dictionary=True)
-#         rqst = "SELECT quote, anime_title, name_character FROM quotes WHERE name_character = %s ORDER BY RAND() LIMIT 1"
-#         cursor.execute(rqst)
-#         quotes = cursor.fetchall()
-#     except mysql.connector.Error as e:
-#         print(f"ошибка:{e}")
-#     finally:
-#         if cursor:
-#             cursor.close()
-#         if cnx and cnx.is_connected():
-#             cnx.close()
-#     return quotes
+def search_by_character(character_name):
+    quotes  = None
+    cnx = None
+    cursor = None
+    try:
+        cnx = mysql.connector.connect(
+            host = DB_HOST, user = DB_USER, password = DB_PASSWORD, database = DATABASE, port = DB_PORT
+    )
+        cursor = cnx.cursor(dictionary=True)
+        rqst = "SELECT quote, anime_title, name_character FROM quotes WHERE name_character LIKE %s ORDER BY RAND() LIMIT 1"
+        search_term = f"%{character_name}%"
+        cursor.execute(rqst, (search_term,))
+        quotes = cursor.fetchall()
+    except mysql.connector.Error as e:
+        print(f"ошибка:{e}")
+    finally:
+        if cursor:
+            cursor.close()
+        if cnx and cnx.is_connected():
+            cnx.close()
+    return quotes
 
-# def search_by_title():
-#     quotes  = None
-#     cnx = None
-#     cursor = None
-#     try:
-#         cnx = mysql.connector.connect(
-#             host = DB_HOST, user = DB_USER, password = DB_PASSWORD, database = DATABASE, port = DB_PORT
-#     )
-#         cursor = cnx.cursor(dictionary=True)
-#         rqst = "SELECT quote, anime_title, name_character FROM quotes WHERE anime_title = %s ORDER BY RAND() LIMIT 1"
-#         cursor.execute(rqst)
-#         quotes = cursor.fetchall()
-#     except mysql.connector.Error as e:
-#         print(f"ошибка:{e}")
-#     finally:
-#         if cursor:
-#             cursor.close()
-#         if cnx and cnx.is_connected():
-#             cnx.close()
-#     return quotes
-
-
-
+def search_by_title(anime_title):
+    quotes  = None
+    cnx = None
+    cursor = None
+    try:
+        cnx = mysql.connector.connect(
+            host = DB_HOST, user = DB_USER, password = DB_PASSWORD, database = DATABASE, port = DB_PORT
+    )
+        cursor = cnx.cursor(dictionary=True)
+        rqst = "SELECT quote, anime_title, name_character FROM quotes WHERE anime_title LIKE %s ORDER BY RAND() LIMIT 1"
+        search_term = f"%{anime_title}%"
+        cursor.execute(rqst, (search_term,))
+        quotes = cursor.fetchall()
+    except mysql.connector.Error as e:
+        print(f"ошибка:{e}")
+    finally:
+        if cursor:
+            cursor.close()
+        if cnx and cnx.is_connected():
+            cnx.close()
+    return quotes
 
 app = Flask(__name__)
 
-
-
 @app.route('/')
+@app.route('/index.html')
 def index():
-    random_quotes_list = get_quotes() 
-    return render_template("index.html", random_quotes=random_quotes_list)
+    quotes = get_quotes()
+    return render_template('index.html', random_quotes=quotes, search_result_character=None, search_result_anime=None)
 
-# @app.route('/daily')
-# def daily():
-#     daily_quote_list = get_quotes_of_day() 
-#     daily_quote_data = daily_quote_list[0] if daily_quote_list else None
+@app.route('/daily.html')
+def daily():
+    daily_quote_list = get_quotes_of_day() 
+    daily_quote_data = daily_quote_list[0] if daily_quote_list else None
     
-#     return render_template("daily_quote.html", daily_quote=daily_quote_data) 
+    return render_template("daily.html", daily_quote=daily_quote_data) 
 
 # @app.route('/favorites')
+# @app.route('/favorites.html')
 # def favorites():
 #     favorites_quotes_list = [] 
 #     return render_template("favorites.html", favorites_quotes=favorites_quotes_list)
+
+
+
+@app.route('/favorites.html')
+def favorites_page():
+    return render_template('favorites.html')
+
+
+@app.route('/search-character', methods=['POST'])
+def handle_character_search():
+    character_name = request.form.get('character_name')
+    found_quotes = []
+    
+    if character_name:
+        found_quotes = search_by_character(character_name)
+    random_quotes = get_quotes()
+    return render_template('index.html', random_quotes=random_quotes, search_result_character=found_quotes,search_result_anime=None) 
+
+@app.route('/search-anime', methods=['POST'])
+def handle_anime_search():
+    anime_title = request.form.get('anime_title')
+    found_quotes = []
+    
+    if anime_title:
+        found_quotes = search_by_title(anime_title)
+    random_quotes = get_quotes()
+    return render_template('index.html', random_quotes=random_quotes, search_result_character=None, search_result_anime=found_quotes)
+
+
 
 # @app.route('/auth', methods=['GET', 'POST'])
 # def auth():
