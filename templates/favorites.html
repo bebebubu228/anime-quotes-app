@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Аниме Цитаты - Избранные цитаты</title>
+    <link rel="stylesheet" href="../static/style.css">
+</head>
+<body>
+    <header class="main-header">
+    <div class="header-top">
+        <div class="logo-section">
+            <img src="../images/logo1.2.png" alt="Лого" width="230" height="100">
+            <img src="../images/chibi1.2.png" alt="Лого" width="100" height="150">
+        </div> 
+        <div class="slogan-container">
+            <div class="slogan">
+                <h1>Аниме Цитаты</h1>
+                <p>Мудрость японской анимации</p>
+            </div>
+        </div>       
+        <div class="auth-buttons">
+            <a href="register.html" class="auth-btn register-btn">Зарегистрироваться</a>
+            <a href="login.html" class="auth-btn login-btn">Войти</a>
+        </div>
+    </div>
+        <nav class="main-nav">
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="index.html" class="nav-link">Главная</a></li>
+                <li class="nav-item"><a href="daily.html" class="nav-link">Цитата дня</a></li>
+                <li class="nav-item"><a href="favorites.html" class="nav-link active">Избранные цитаты</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main class="main-content">
+        <div class="content-wrapper">
+            <section class="quotes-section">
+                <h2>Избранные цитаты</h2>
+                <div class="no-results">
+                    <h3>Чтобы просматривать избранные цитаты, необходимо войти в аккаунт</h3>
+                    <!-- <div style="margin-top: 1rem;">
+                        <a href="register.html" class="auth-btn register-btn">Зарегистрироваться</a>
+                        <a href="login.html" class="auth-btn login-btn" style="margin-left: 1rem;">Войти</a>
+                    </div> -->
+                </div>
+            </section>
+
+            <aside class="sidebar">
+                <!-- Такая же боковая панель как на главной -->
+                <div class="sidebar-section">
+                    <h3>Случайная цитата персонажа</h3>
+                    <div class="search-box">
+                        <input type="text" placeholder="Введите имя персонажа">
+                        <button>Найти</button>
+                    </div>
+                    <div class="random-quote">
+                        <div class="quote-card">
+                            <div class="quote-text">
+                                "Я не верю в судьбу. Люди сами должны творить свою судьбу."
+                            </div>
+                            <div class="quote-meta">
+                                <div class="quote-source">
+                                    <span class="quote-character">Луффи</span> из 
+                                    <span class="quote-anime">"One Piece"</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sidebar-section">
+                    <h3>Случайная цитата из аниме</h3>
+                    <div class="search-box">
+                        <input type="text" placeholder="Введите название аниме">
+                        <button>Найти</button>
+                    </div>
+                    <div class="random-quote">
+                        <div class="quote-card">
+                            <div class="quote-text">
+                                "Жизнь подобна свече на ветру, готовой угаснуть с следующим порывом, но пока она горит, она сияет ярче всего."
+                            </div>
+                            <div class="quote-meta">
+                                <div class="quote-source">
+                                    <span class="quote-character">Мушико</span> из 
+                                    <span class="quote-anime">"Моя геройская академия"</span>
+                                </div></div>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <footer class="main-footer">
+        <div class="footer-content">
+            <p>&copy; 2025 Аниме Цитаты</p>
+            <a href="https://github.com/yourusername" target="_blank" class="github-link">GitHub</a>
+        </div>
+    </footer>
+</body>
+</html>
