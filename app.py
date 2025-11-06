@@ -109,6 +109,38 @@ def get_quotes_of_day():
         return daily_cash
     else:
         return[]
+
+
+# def form_auth():
+#     # data = []
+#     cnx = None
+#     cursor = None
+#     if request.method == 'POST':
+#         user_name = request.form.get('user_name')
+#         email = request.form.get('email')
+#         password = request.form.get('password')
+#     try:
+#         cnx = mysql.connector.connect(
+#             host = DB_HOST, user = DB_USER, password = DB_PASSWORD, database = DATABASE, port = DB_PORT
+#     )
+#         cursor = cnx.cursor(dictionary=True)
+#         rqst= "SELECT username, email, password_hash FROM users"
+#         cursor.execute(rqst)
+#         data = cursor.fetchall()
+#     except mysql.connector.Error as e:
+#         print(f"ошибка:{e}")
+#     finally:
+#         if cursor:
+#             cursor.close()
+#         if cnx and cnx.is_connected():
+#             cnx.close()
+#     try:
+#         if data[0][0] != user_name and email and password:
+#             print("неверный логин или пароль")
+#             return 
+#     except:
+    
+    # return data
     
 # def search_by_character():
 #     quotes  = None
@@ -152,6 +184,9 @@ def get_quotes_of_day():
 #             cnx.close()
 #     return quotes
 
+
+
+
 app = Flask(__name__)
 
 
@@ -161,17 +196,23 @@ def index():
     random_quotes_list = get_quotes() 
     return render_template("index.html", random_quotes=random_quotes_list)
 
-@app.route('/daily')
-def daily():
-    daily_quote_list = get_quotes_of_day() 
-    daily_quote_data = daily_quote_list[0] if daily_quote_list else None
+# @app.route('/daily')
+# def daily():
+#     daily_quote_list = get_quotes_of_day() 
+#     daily_quote_data = daily_quote_list[0] if daily_quote_list else None
     
-    return render_template("daily_quote.html", daily_quote=daily_quote_data) 
+#     return render_template("daily_quote.html", daily_quote=daily_quote_data) 
 
-@app.route('/favorites')
-def favorites():
-    favorites_quotes_list = [] 
-    return render_template("favorites.html", favorites_quotes=favorites_quotes_list)
+# @app.route('/favorites')
+# def favorites():
+#     favorites_quotes_list = [] 
+#     return render_template("favorites.html", favorites_quotes=favorites_quotes_list)
+
+# @app.route('/auth', methods=['GET', 'POST'])
+# def auth():
+#     try:
+#         if 
+
 
 if __name__ == "__main__":
     # load_quotes()
