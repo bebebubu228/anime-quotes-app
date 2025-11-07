@@ -83,25 +83,25 @@ body {
 }
 
 .register-btn {
-    background: linear-gradient(135deg, #4caf50, #66bb6a);
+    background:#4b8b4d;
     color: white;
 }
 
 .register-btn:hover {
-    /* background: linear-gradient(135deg, #43a047, #5cb860); */
-    color: #2e7d32;
+    background: #4b8b4d;
+    color: white;
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
 }
 
 .login-btn {
     background: transparent;
-    color: #2e7d32;
-    border: 2px solid #4caf50;
+    color: #4b8b4d;
+    border: 2px solid #4b8b4d;
 }
 
 .login-btn:hover {
-    background: #4caf50;
+    background: #4b8b4d;
     color: white;
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(76, 175, 80, 0.2);
@@ -127,6 +127,7 @@ body {
 .nav-link {
     display: block;
     padding: 1rem 1.5rem;
+     font-family: 'Merriweather', serif;
     text-decoration: none;
     color: #2e7d32;
     font-weight: 500;
@@ -169,6 +170,7 @@ body {
 }
 
 .quotes-section h2 {
+     font-family: 'Merriweather', serif;
     color: #2e7d32;
     margin-bottom: 1.5rem;
     font-size: 1.8rem;
@@ -251,11 +253,11 @@ body {
     transform: scale(1.05);
 }
 favorite-btn.added {
-    background: linear-gradient(135deg, #4caf50, #66bb6a);
+    background: #4b8b4d;
 }
 
 .favorite-btn.added:hover {
-    background: linear-gradient(135deg, #43a047, #5cb860);
+    background: #4b8b4d;
 }
 
 .favorite-btn.requires-auth {
@@ -282,6 +284,7 @@ favorite-btn.added {
 }
 
 .sidebar-section h3 {
+     font-family: 'Merriweather', serif;
     color: #2e7d32;
     margin-bottom: 1rem;
     font-size: 1.2rem;
@@ -310,7 +313,7 @@ favorite-btn.added {
 
 .search-box button {
     padding: 0.7rem 1rem;
-    background: #4caf50;
+    background: #4b8b4d;
     color: white;
     border: none;
     border-radius: 8px;
@@ -320,7 +323,7 @@ favorite-btn.added {
 }
 
 .search-box button:hover {
-    background: #45a049;
+    background: #52a356;
 }
 
 .random-quote {
@@ -378,7 +381,7 @@ favorite-btn.added {
 }
 
 .close-btn:hover {
-    color: #2e7d32;
+    color: #4b8b4d;
 }
 
 .modal-content h3 {
@@ -404,11 +407,11 @@ favorite-btn.added {
 }
 
 .auth-form input:focus {
-    border-color: #4caf50;
+    border-color: #4b8b4d;
 }
 
 .submit-btn {
-    background: linear-gradient(135deg, #4caf50, #66bb6a);
+    background: #4b8b4d;
     color: white;
     border: none;
     padding: 1rem;
@@ -421,7 +424,7 @@ favorite-btn.added {
 }
 
 .submit-btn:hover {
-    background: linear-gradient(135deg, #43a047, #5cb860);
+    background: #4b8b4d;
     transform: translateY(-2px);
 }
 
@@ -483,11 +486,11 @@ favorite-btn.added {
 
 .no-results {text-align: center;
     color: #666;
-    font-style: italic;
+    
     padding: 2rem;
     background: #f9f9f9;
     border-radius: 8px;
-    border: 2px dashed #e8f5e8;
+    border: 2px solid #e8f5e8;
 }
 
 .error-message {
@@ -617,7 +620,7 @@ favorite-btn.added {
 }
 
 .favorites-view .quote-card {
-    border-color: #4caf50;
+    border-color: #4b8b4d;
     background: linear-gradient(135deg, #e8f5e8, #ffffff);
 }
 
@@ -629,11 +632,109 @@ favorite-btn.added {
 
 /* Индикатор текущего просмотра */
 .current-view-indicator {
-    background: #4caf50;
+    background: #4b8b4d;
     color: white;
     padding: 0.3rem 0.8rem;
     border-radius: 15px;
     font-size: 0.8rem;
     margin-left: 1rem;
     vertical-align: middle;
+}
+/* Добавьте эти стили в конец вашего файла style.css */
+
+/* Стили для страниц авторизации */
+.auth-page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.auth-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+}
+.auth-form-container h2{
+    font-family: 'Merriweather', serif;
+}
+.auth-form-container {
+    width: 100%;
+    max-width: 500px;
+    background: white;
+    padding: 2.5rem;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    border: 2px solid #e8f5e8;
+}
+
+.back-btn {
+    display: inline-flex;
+    align-items: center;
+    color: #4caf50;
+    text-decoration: none;
+    margin-bottom: 1.5rem;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.back-btn:hover {
+    color: #2e7d32;
+    text-decoration: none;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #2e7d32;
+    font-weight: 500;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 1rem;
+    border: 2px solid #e8f5e8;
+    border-radius: 8px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus {
+    border-color: #4caf50;
+}
+
+.auth-form .submit-btn {
+    width: 100%;
+    padding: 1rem;
+    margin-top: 1rem;
+}
+
+.auth-switch {
+    text-align: center;
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid #e8f5e8;
+}
+
+.auth-switch a {
+    color: #4caf50;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.auth-switch a:hover {
+    text-decoration: underline;
+}
+
+/* Центрирование заголовков на страницах авторизации */
+.auth-form-container h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #2e7d32;
 }
