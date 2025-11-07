@@ -66,6 +66,6 @@
 Поддержка
 
 При возникновении вопросов или проблем обращайтесь:
-· GitHub: https://github.com/tragweq-ui, 
-· Email: sofamarchenko2007@gmail.com, 
+· GitHub: https://github.com/tragweq-ui, https://github.com/bebebubu228
+· Email: sofamarchenko2007@gmail.com, tea80083@gmail.com
 Документация обновлена: 2025
