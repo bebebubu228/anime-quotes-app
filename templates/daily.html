@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Аниме Цитаты - Главная</title>
+    <title>Аниме Цитаты - Цитата дня</title>
     <link rel="stylesheet" href="../static/style.css">
 </head>
 
@@ -28,8 +28,8 @@
         </div>
         <nav class="main-nav">
             <ul class="nav-menu">
-                <li class="nav-item"><a href="index.html" class="nav-link active">Главная</a></li>
-                <li class="nav-item"><a href="daily.html" class="nav-link">Цитата дня</a></li>
+                <li class="nav-item"><a href="index.html" class="nav-link">Главная</a></li>
+                <li class="nav-item"><a href="daily.html" class="nav-link active">Цитата дня</a></li>
                 <li class="nav-item"><a href="favorites.html" class="nav-link">Избранные цитаты</a></li>
             </ul>
         </nav>
@@ -47,25 +47,24 @@
         
         <div class="content-wrapper">
             <section class="quotes-section">
+                <h2>Цитата дня</h2>
                 <div class="quotes-list">
-                    {% if random_quotes %}
-                    {% for quote in random_quotes %}
-                    <div class="quote-card">
+                    {% if daily_quote %}
+                    <div class="quote-card quote-of-day">
                         <div class="quote-text">
-                            "{{ quote.quote }}"
+                            "{{ daily_quote.quote }}"
                         </div>
                         <div class="quote-meta">
                             <div class="quote-source">
-                                <span class="quote-character">{{ quote.name_character }}</span> из
-                                <span class="quote-anime">"{{ quote.anime_title }}"</span>
+                                <span class="quote-character">{{ daily_quote.name_character }}</span> из
+                                <span class="quote-anime">"{{ daily_quote.anime_title }}"</span>
                             </div>
                             <a href="register.html" class="favorite-btn">В избранное</a>
                         </div>
                     </div>
-                    {% endfor %}
                     {% else %}
                     <div class="no-quotes">
-                        <p>На данный момент случайных цитат нет. Попробуйте обновить страницу позже.</p>
+                        <p>Сегодняшняя цитата не найдена.</p>
                     </div>
                     {% endif %}
                 </div>
@@ -76,66 +75,29 @@
                     <h3>Поиск по персонажу</h3>
                     <form method="POST" action="/search-character">
                         <div class="search-box">
-                            <input type="text" placeholder="Введите имя персонажа" name="character_name">
+                            <input type="text" placeholder="Введите имя персонажа" name="character_name" required>
                             <button type="submit">Найти</button>
                         </div>
                     </form>
-                    <div class="random-quote">
-                        {% if search_result_character %}
-                        {% for quote in search_result_character %}
-                        <div class="quote-card">
-                            <div class="quote-text">
-                                "{{ quote.quote }}"
-                            </div>
-                            <div class="quote-meta">
-                                <div class="quote-source">
-                                    <span class="quote-character">{{ quote.name_character }}</span> из
-                                    <span class="quote-anime">"{{ quote.anime_title }}"</span>
-                                </div>
-                            </div>
-                        </div>
-                        {% endfor %}
-                        {% elif search_result_character is not none %} 
-                            <p>Цитата персонажа не найдена.</p>
-                        {% else %}
-                            <p class="search-tip">Введите имя персонажа для поиска.</p>
-                        {% endif %}
-                    </div>
+                    
                 </div>
 
                 <div class="sidebar-section">
                     <h3>Поиск по аниме</h3>
                     <form method="POST" action="/search-anime">
                         <div class="search-box">
-                            <input type="text" placeholder="Введите название аниме" name="anime_title">
+                            <input type="text" placeholder="Введите название аниме" name="anime_title" required>
                             <button type="submit">Найти</button>
                         </div>
                     </form>
                     <div class="random-quote">
-                        {% if search_result_anime %}
-                        {% for quote in search_result_anime %}
-                        <div class="quote-card">
-                            <div class="quote-text">
-                                "{{ quote.quote }}"
-                            </div>
-                            <div class="quote-meta">
-                                <div class="quote-source">
-                                    <span class="quote-character">{{ quote.name_character }}</span> из
-                                    <span class="quote-anime">"{{ quote.anime_title }}"</span>
-                                </div>
-                            </div>
-                        </div>
-                        {% endfor %}
-                        {% elif search_result_anime is not none %} 
-                            <p>Цитата из аниме не найдена.</p>
-                        {% else %}
-                            <p class="search-tip">Введите название аниме для поиска.</p>
-                        {% endif %}
+                        <p class="search-tip">Результаты поиска будут показаны на главной странице.</p>
                     </div>
                 </div>
             </aside>
         </div>
     </main>
+
     <footer class="main-footer">
         <div class="footer-content">
             <p>&copy; 2025 Аниме Цитаты</p>

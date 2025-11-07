@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Аниме Цитаты - Избранные цитаты</title>
+    <link rel="stylesheet" href="../static/style.css">
+</head>
+
+<body>
+    <header class="main-header">
+        <div class="header-top">
+            <div class="logo-section">
+                <img src="../static/images/logo1.2.png" alt="Лого" width="230" height="100">
+                <img src="../static/images/chibi1.2.png" alt="Лого" width="100" height="150">
+            </div>
+            <div class="slogan-container">
+                <div class="slogan">
+                    <h1>Аниме Цитаты</h1>
+                    <p>Мудрость японской анимации</p>
+                </div>
+            </div>
+            <div class="auth-buttons">
+                <a href="register.html" class="auth-btn register-btn">Зарегистрироваться</a>
+                <a href="login.html" class="auth-btn login-btn">Войти</a>
+            </div>
+        </div>
+        <nav class="main-nav">
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="index.html" class="nav-link">Главная</a></li>
+                <li class="nav-item"><a href="daily.html" class="nav-link">Цитата дня</a></li>
+                <li class="nav-item"><a href="favorites.html" class="nav-link active">Избранные цитаты</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main class="main-content">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <ul class="flashes-container">
+            {% for category, message in messages %}
+                <li class="flash-{{ category }}">{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+        {% endwith %}
+        
+        <div class="content-wrapper">
+            <section class="quotes-section">
+                <h2>Избранные цитаты</h2>
+                <div class="no-results">
+                    <h3>Чтобы просматривать избранные цитаты, необходимо войти в аккаунт</h3>
+                    </div>
+            </section>
+
+            <aside class="sidebar">
+                <div class="sidebar-section">
+                    <h3>Поиск по персонажу</h3>
+                    <form method="POST" action="/search-character">
+                        <div class="search-box">
+                            <input type="text" placeholder="Введите имя персонажа" name="character_name" required>
+                            <button type="submit">Найти</button>
+                        </div>
+                    </form>
+                    <div class="random-quote">
+                        <p class="search-tip">Результаты поиска будут показаны на главной странице.</p>
+                    </div>
+                </div>
+
+                <div class="sidebar-section">
+                    <h3>Поиск по аниме</h3>
+                    <form method="POST" action="/search-anime">
+                        <div class="search-box">
+                            <input type="text" placeholder="Введите название аниме" name="anime_title" required>
+                            <button type="submit">Найти</button>
+                        </div>
+                    </form>
+                    <div class="random-quote">
+                        <p class="search-tip">Результаты поиска будут показаны на главной странице.</p>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <footer class="main-footer">
+        <div class="footer-content">
+            <p>&copy; 2025 Аниме Цитаты</p>
+            <a href="https://github.com/yourusername" target="_blank" class="github-link">GitHub</a>
+        </div>
+    </footer>
+</body>
+
+</html>
