@@ -1,29 +1,31 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Аниме Цитаты - Цитата дня</title>
     <link rel="stylesheet" href="../static/style.css">
 </head>
+
 <body>
     <header class="main-header">
-    <div class="header-top">
-        <div class="logo-section">
-            <img src="../images/logo1.2.png" alt="Лого" width="230" height="100">
-            <img src="../images/chibi1.2.png" alt="Лого" width="100" height="150">
-        </div> 
-        <div class="slogan-container">
-            <div class="slogan">
-                <h1>Аниме Цитаты</h1>
-                <p>Мудрость японской анимации</p>
+        <div class="header-top">
+            <div class="logo-section">
+                <img src="../static/images/logo1.2.png" alt="Лого" width="230" height="100">
+                <img src="../static/images/chibi1.2.png" alt="Лого" width="100" height="150">
             </div>
-        </div>       
-        <div class="auth-buttons">
-            <a href="register.html" class="auth-btn register-btn">Зарегистрироваться</a>
-            <a href="login.html" class="auth-btn login-btn">Войти</a>
+            <div class="slogan-container">
+                <div class="slogan">
+                    <h1>Аниме Цитаты</h1>
+                    <p>Мудрость японской анимации</p>
+                </div>
+            </div>
+            <div class="auth-buttons">
+                <a href="register.html" class="auth-btn register-btn">Зарегистрироваться</a>
+                <a href="login.html" class="auth-btn login-btn">Войти</a>
+            </div>
         </div>
-    </div>
         <nav class="main-nav">
             <ul class="nav-menu">
                 <li class="nav-item"><a href="index.html" class="nav-link">Главная</a></li>
@@ -33,65 +35,63 @@
         </nav>
     </header>
     <main class="main-content">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <ul class="flashes-container">
+            {% for category, message in messages %}
+                <li class="flash-{{ category }}">{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+        {% endwith %}
+        
         <div class="content-wrapper">
             <section class="quotes-section">
                 <h2>Цитата дня</h2>
                 <div class="quotes-list">
+                    {% if daily_quote %}
                     <div class="quote-card quote-of-day">
                         <div class="quote-text">
-                            "Сегодняшний день - это завтрашнее воспоминание. Проживи его так, чтобы было что вспомнить."
+                            "{{ daily_quote.quote }}"
                         </div>
                         <div class="quote-meta">
                             <div class="quote-source">
-                                <span class="quote-character">Койоми Арараги</span> из 
-                                <span class="quote-anime">"Моногатари"</span>
+                                <span class="quote-character">{{ daily_quote.name_character }}</span> из
+                                <span class="quote-anime">"{{ daily_quote.anime_title }}"</span>
                             </div>
                             <a href="register.html" class="favorite-btn">В избранное</a>
                         </div>
                     </div>
+                    {% else %}
+                    <div class="no-quotes">
+                        <p>Сегодняшняя цитата не найдена.</p>
+                    </div>
+                    {% endif %}
                 </div>
             </section>
 
             <aside class="sidebar">
-                <!-- Такая же боковая панель как на главной -->
                 <div class="sidebar-section">
-                    <h3>Случайная цитата персонажа</h3>
-                    <div class="search-box">
-                        <input type="text" placeholder="Введите имя персонажа">
-                        <button>Найти</button>
-                    </div>
-                    <div class="random-quote">
-                        <div class="quote-card">
-                            <div class="quote-text">
-                                "Я не верю в судьбу. Люди сами должны творить свою судьбу."
-                            </div>
-                            <div class="quote-meta">
-                                <div class="quote-source">
-                                    <span class="quote-character">Луффи</span> из 
-                                    <span class="quote-anime">"One Piece"</span>
-                                </div>
-                            </div>
+                    <h3>Поиск по персонажу</h3>
+                    <form method="POST" action="/search-character">
+                        <div class="search-box">
+                            <input type="text" placeholder="Введите имя персонажа" name="character_name" required>
+                            <button type="submit">Найти</button>
                         </div>
-                    </div>
+                    </form>
+                    
                 </div>
 
                 <div class="sidebar-section">
-                    <h3>Случайная цитата из аниме</h3>
-                    <div class="search-box">
-                        <input type="text" placeholder="Введите название аниме">
-                        <button>Найти</button>
-                    </div>
-                    <div class="random-quote">
-                        <div class="quote-card">
-                            <div class="quote-text">
-                                "Жизнь подобна свече на ветру, готовой угаснуть с следующим порывом, но пока она горит, она сияет ярче всего."
-                            </div><div class="quote-meta">
-                                <div class="quote-source">
-                                    <span class="quote-character">Мушико</span> из 
-                                    <span class="quote-anime">"Моя геройская академия"</span>
-                                </div>
-                            </div>
+                    <h3>Поиск по аниме</h3>
+                    <form method="POST" action="/search-anime">
+                        <div class="search-box">
+                            <input type="text" placeholder="Введите название аниме" name="anime_title" required>
+                            <button type="submit">Найти</button>
                         </div>
+                    </form>
+                    <div class="random-quote">
+                        <p class="search-tip">Результаты поиска будут показаны на главной странице.</p>
                     </div>
                 </div>
             </aside>
@@ -105,4 +105,5 @@
         </div>
     </footer>
 </body>
+
 </html>
