@@ -16,7 +16,7 @@ DB_PORT = os.getenv('DB_PORT')
 
 URL = 'https://api.animechan.io/v1'
 
-
+# функция для загрузки цитат с api и сохранения их в бд
 def load_quotes():
     params = {
         "anime" : "Cowboy Bebop",
@@ -28,12 +28,12 @@ def load_quotes():
         response = requests.get(f'{URL}/quotes/', params=params)
         response.raise_for_status()
         json_in=response.json()
-        print("успешно")
+        print("запрос к api прошел успешно.")
     except requests.exceptions.RequestException as error:
-        print(f"ошибка: {error}")
+        print(f"ошибка библиотеки requests: {error}")
         return
     if not isinstance(json_in, dict) or 'data' not in json_in or not json_in['data']:
-        print("ошибка: API не вернул список цитат или список пуст.")
+        print("ошибка: api не вернул список цитат или список пуст.")
         print(f"полученный ответ: {json_in}")
         return
 
@@ -59,16 +59,17 @@ def load_quotes():
         cnx.commit()
         print(f"вставлено {cursor.rowcount} записей в БД.")
     except requests.exceptions.RequestException as error:
-        print(f"ошибка при запросе к API: {error}")
+        print(f"ошибка при запросе к api: {error}")
         return
     except mysql.connector.Error as e:
-        print(f"ошибка:{e}")
+        print(f"ошибка бд:{e}")
     finally:
         if cursor:
             cursor.close()
         if cnx and cnx.is_connected():
             cnx.close()
 
+# функция для получения одной случайной цитаты из бд
 def get_quotes():
     quotes = []
     cnx = None
@@ -82,7 +83,7 @@ def get_quotes():
         cursor.execute(rqst)
         quotes = cursor.fetchall()
     except mysql.connector.Error as e:
-        print(f"ошибка:{e}")
+        print(f"ошибка бд:{e}")
     finally:
         if cursor:
             cursor.close()
@@ -90,9 +91,10 @@ def get_quotes():
             cnx.close()
     return quotes
 
-daily_cash = None
-last_cash = None
+daily_cash = None # глобальная переменная для хранения закэшированной "цитаты дня"
+last_cash = None # глобальная переменная для хранения даты последнего кэширования
 
+# функция для получения цитаты дня 
 def get_quotes_of_day():
     global daily_cash
     global last_cash
@@ -100,6 +102,7 @@ def get_quotes_of_day():
 
     if daily_cash is not None and last_cash==today:
         return daily_cash
+    
     new_quotes = get_quotes()
 
     if new_quotes:
@@ -108,11 +111,12 @@ def get_quotes_of_day():
         return daily_cash
     else:
         return[]
- 
+    
+# функция для регистрации нового пользователя
 def reg_form(username, email, password):
     cnx = None
     cursor = None
-    password_hash = bcrypt.generate_password_hash(password).decode('utf-8')
+    password_hash = bcrypt.generate_password_hash(password).decode('utf-8') # хэширование пароля перед сохранением
     try:
         cnx = mysql.connector.connect(
             host = DB_HOST, user = DB_USER, password = DB_PASSWORD, database = DATABASE, port = DB_PORT
@@ -122,24 +126,25 @@ def reg_form(username, email, password):
         cursor.execute(rqst_select, (username, email)) 
         
         if cursor.fetchone():
-            return "Пользователь с таким именем или email уже существует", False 
+            return "gользователь с таким именем или email уже существует", False 
         rqst_insert = "INSERT INTO users(username, email, password_hash) VALUES(%s, %s, %s)"
         cursor.execute(rqst_insert, (username, email, password_hash))
         cnx.commit() 
-        return "Регистрация успешна! Теперь вы можете войти.", True 
+        return "регистрация успешна! теперь вы можете войти.", True 
     
     except mysql.connector.Error as e:
-        print(f"Ошибка базы данных при регистрации: {e}")
-        return f"Произошла ошибка базы данных: {e}", False 
+        print(f"ошибка базы данных при регистрации: {e}")
+        return f"ошибка базы данных: {e}", False 
     except Exception as e:
-        print(f"Непредвиденная ошибка при регистрации: {e}")
-        return f"Произошла непредвиденная ошибка: {e}", False
+        print(f"непредвиденная ошибка при регистрации: {e}")
+        return f"произошла непредвиденная ошибка: {e}", False
     finally:
         if cursor:
             cursor.close()
         if cnx and cnx.is_connected():
             cnx.close()
 
+# функция для аутентификации пользователя
 def log_form(username, email, password):
     user = None
     cnx = None
@@ -154,22 +159,23 @@ def log_form(username, email, password):
         user = cursor.fetchone()
         
         if not user:
-            return "Неверное имя пользователя или email", False, None
+            return "неверное имя пользователя или email", False, None
         if bcrypt.check_password_hash(user['password_hash'], password): 
-            return f"Добро пожаловать, {user['username']}!", True, user
+            return f"добро пожаловать, {user['username']}", True, user
         else:
-            return "Неверный пароль", False, None
+            return "неверный пароль", False, None
             
     except mysql.connector.Error as e:
-        return f"Произошла ошибка базы данных: {e}", False, None
+        return f"ошибка базы данных: {e}", False, None
     except Exception as e:
-        return f"Произошла непредвиденная ошибка: {e}", False, None
+        return f"произошла непредвиденная ошибка: {e}", False, None
     finally:
         if cursor:
             cursor.close()
         if cnx and cnx.is_connected():
             cnx.close()
 
+# функция для поиска цитат по имени персонажа.
 def search_by_character(character_name):
     quotes  = None
     cnx = None
@@ -192,6 +198,7 @@ def search_by_character(character_name):
             cnx.close()
     return quotes
 
+# функция для поиска цитат по названию аниме
 def search_by_title(anime_title):
     quotes  = None
     cnx = None
@@ -266,7 +273,7 @@ def handle_register():
     password = request.form.get('password')
     
     if not username or not email or not password:
-        flash('Пожалуйста, заполните все поля.', 'error')
+        flash('пожалуйста, заполните все поля.', 'error')
         return redirect(url_for('register_page'))
     message, success = reg_form(username, email, password)
     if success:
@@ -287,7 +294,7 @@ def handle_login():
     password = request.form.get('password')
     
     if not username or not email or not password:
-        flash('Пожалуйста, заполните все поля.', 'error')
+        flash('пожалуйста, заполните все поля.', 'error')
         return redirect(url_for('login_page'))
 
     message, success, user = log_form(username, email, password)
