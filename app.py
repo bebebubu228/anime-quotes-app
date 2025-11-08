@@ -222,7 +222,7 @@ def search_by_title(anime_title):
     return quotes
 
 app = Flask(__name__)
-app.secret_key = 'sdj1u5B^7*6sDk90jH@lP8mN!oV3fTqX'
+
 bcrypt = Bcrypt(app)
 
 @app.route('/')
